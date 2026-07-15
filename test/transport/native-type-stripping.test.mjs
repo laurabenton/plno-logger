@@ -29,7 +29,7 @@ test('pino.transport with native TypeScript file', { skip: skipTests ? skipMessa
   )
 
   // We need to dynamically import pino to ensure worker thread inherits flags
-  const { default: pino } = await import('../../pinox.js')
+  const { default: pino } = await import('../../plno-logger.js')
 
   const transport = pino.transport({
     target: join(import.meta.dirname || url.fileURLToPath(new URL('.', import.meta.url)), '..', 'fixtures', 'ts', 'to-file-transport-native.mts'),
@@ -64,7 +64,7 @@ test('pino.transport with native TypeScript file URL', { skip: skipTests ? skipM
     '_' + Math.random().toString(36).substr(2, 9)
   )
 
-  const { default: pino } = await import('../../pinox.js')
+  const { default: pino } = await import('../../plno-logger.js')
 
   const transport = pino.transport({
     target: url.pathToFileURL(join(import.meta.dirname || url.fileURLToPath(new URL('.', import.meta.url)), '..', 'fixtures', 'ts', 'to-file-transport-native.mts')).href,
@@ -103,7 +103,7 @@ test('pino.transport with multiple native TypeScript targets', { skip: skipTests
     '_' + Math.random().toString(36).substr(2, 9)
   )
 
-  const { default: pino } = await import('../../pinox.js')
+  const { default: pino } = await import('../../plno-logger.js')
   const fixtureDir = join(import.meta.dirname || url.fileURLToPath(new URL('.', import.meta.url)), '..', 'fixtures', 'ts')
 
   const transport = pino.transport({

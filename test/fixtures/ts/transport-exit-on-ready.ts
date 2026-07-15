@@ -1,7 +1,7 @@
-import pino from '../../../pinox'
+import pino from '../../../plno-logger'
 
 const transport = pino.transport({
-  target: 'pinox/file'
+  target: 'plno-logger/file'
 })
 const logger = pino(transport)
 

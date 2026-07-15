@@ -1,8 +1,8 @@
 import { expect } from 'tstyche'
 
-import * as pinoStar from '../../pinox.js'
-import pinoDefault, { default as pino, pino as pinoNamed } from '../../pinox.js'
-import pinoCjsImport = require ('../../pinox.js')
+import * as pinoStar from '../../plno-logger.js'
+import pinoDefault, { default as pino, pino as pinoNamed } from '../../plno-logger.js'
+import pinoCjsImport = require ('../../plno-logger.js')
 
 const log = pino()
 expect(log.info).type.toBe<pino.LogFn>()

@@ -1,4 +1,4 @@
-import pino from '../../../pinox'
+import pino from '../../../plno-logger'
 import { join } from 'node:path'
 
 const transport = pino.transport({

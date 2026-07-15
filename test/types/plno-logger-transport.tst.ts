@@ -1,10 +1,10 @@
 import { expect } from 'tstyche'
 
-import pino from '../../pinox.js'
+import pino from '../../plno-logger.js'
 
 // Single
 const transport = pino.transport({
-  target: '#pinox/pretty',
+  target: '#plno-logger/pretty',
   options: { some: 'options for', the: 'transport' }
 })
 pino(transport)
@@ -20,12 +20,12 @@ const transports = pino.transport({
   targets: [
     {
       level: 'info',
-      target: '#pinox/pretty',
+      target: '#plno-logger/pretty',
       options: { some: 'options for', the: 'transport' }
     },
     {
       level: 'trace',
-      target: '#pinox/file',
+      target: '#plno-logger/file',
       options: { destination: './test.log' }
     }
   ]
@@ -38,12 +38,12 @@ expect(
       targets: [
         {
           level: 'info',
-          target: '#pinox/pretty',
+          target: '#plno-logger/pretty',
           options: { some: 'options for', the: 'transport' }
         },
         {
           level: 'trace',
-          target: '#pinox/file',
+          target: '#plno-logger/file',
           options: { destination: './test.log' }
         }
       ]
@@ -55,12 +55,12 @@ const transportsWithCustomLevels = pino.transport({
   targets: [
     {
       level: 'info',
-      target: '#pinox/pretty',
+      target: '#plno-logger/pretty',
       options: { some: 'options for', the: 'transport' }
     },
     {
       level: 'foo',
-      target: '#pinox/file',
+      target: '#plno-logger/file',
       options: { destination: './test.log' }
     }
   ],
@@ -74,12 +74,12 @@ expect(
       targets: [
         {
           level: 'info',
-          target: '#pinox/pretty',
+          target: '#plno-logger/pretty',
           options: { some: 'options for', the: 'transport' }
         },
         {
           level: 'trace',
-          target: '#pinox/file',
+          target: '#plno-logger/file',
           options: { destination: './test.log' }
         }
       ],
@@ -90,8 +90,8 @@ expect(
 
 const transportsWithoutOptions = pino.transport({
   targets: [
-    { target: '#pinox/pretty' },
-    { target: '#pinox/file' }
+    { target: '#plno-logger/pretty' },
+    { target: '#plno-logger/file' }
   ],
   levels: { foo: 35 }
 })
@@ -101,8 +101,8 @@ expect(
   pino({
     transport: {
       targets: [
-        { target: '#pinox/pretty' },
-        { target: '#pinox/file' }
+        { target: '#plno-logger/pretty' },
+        { target: '#plno-logger/file' }
       ],
       levels: { foo: 35 }
     }
@@ -115,7 +115,7 @@ const pipelineTransport = pino.transport({
       target: './my-transform.js'
     },
     {
-      // Use target: 'pinox/file' to write to stdout
+      // Use target: 'plno-logger/file' to write to stdout
       // without any change.
       target: 'pino-pretty'
     }
@@ -131,7 +131,7 @@ expect(
           target: './my-transform.js'
         },
         {
-          // Use target: 'pinox/file' to write to stdout
+          // Use target: 'plno-logger/file' to write to stdout
           // without any change.
           target: 'pino-pretty'
         }

@@ -4,7 +4,7 @@ Asynchronous logging enables the minimum overhead of Pino.
 Asynchronous logging works by buffering log messages and writing them in larger chunks.
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const logger = pino(pino.destination({
   dest: './my-file', // omit for stdout
   minLength: 4096, // Buffer before writing

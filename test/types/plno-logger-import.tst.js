@@ -9,9 +9,9 @@ const {
   stdTimeFunctions,
   transport,
   version
-} = require('../../pinox.js')
-const { default: pinoDefault } = require('../../pinox.js')
-const pinoCjs = require('../../pinox.js')
+} = require('../../plno-logger.js')
+const { default: pinoDefault } = require('../../plno-logger.js')
+const pinoCjs = require('../../plno-logger.js')
 
 const log = pino()
 log.info('test')
@@ -51,19 +51,19 @@ pinoDefault.stdTimeFunctions.epochTime()
 pinoCjs.stdTimeFunctions.epochTime()
 
 transport({
-  target: '#pinox/pretty',
+  target: '#plno-logger/pretty',
   options: { some: 'options for', the: 'transport' }
 })
 pino.transport({
-  target: '#pinox/pretty',
+  target: '#plno-logger/pretty',
   options: { some: 'options for', the: 'transport' }
 })
 pinoDefault.transport({
-  target: '#pinox/pretty',
+  target: '#plno-logger/pretty',
   options: { some: 'options for', the: 'transport' }
 })
 pinoCjs.transport({
-  target: '#pinox/pretty',
+  target: '#plno-logger/pretty',
   options: { some: 'options for', the: 'transport' }
 })
 

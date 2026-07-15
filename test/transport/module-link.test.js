@@ -112,10 +112,10 @@ test('pino({ transport })', { skip: isWin || isYarnPnp }, async (t) => {
 
   await mkdir(join(folder, 'node_modules'), { recursive: true })
 
-  // Link pinox
+  // Link plno-logger
   await symlink(
     join(__dirname, '..', '..'),
-    join(folder, 'node_modules', 'pinox')
+    join(folder, 'node_modules', 'plno-logger')
   )
 
   await installTransportModule(folder)
@@ -123,7 +123,7 @@ test('pino({ transport })', { skip: isWin || isYarnPnp }, async (t) => {
   const toRun = join(folder, 'index.js')
 
   const toRunContent = `
-    const pino = require('pinox')
+    const pino = require('plno-logger')
     const logger = pino({
       transport: {
         target: 'transport',
@@ -171,10 +171,10 @@ test('pino({ transport }) from a wrapped dependency', { skip: isWin || isYarnPnp
     rimraf.sync(folder)
   })
 
-  // Link pinox
+  // Link plno-logger
   await symlink(
     join(__dirname, '..', '..'),
-    join(wrappedFolder, 'node_modules', 'pinox')
+    join(wrappedFolder, 'node_modules', 'plno-logger')
   )
 
   // Link get-caller-file
@@ -192,7 +192,7 @@ test('pino({ transport }) from a wrapped dependency', { skip: isWin || isYarnPnp
   await installTransportModule(folder)
 
   const pkgjsonContent = {
-    name: 'pinox'
+    name: 'plno-logger'
   }
 
   await writeFile(join(wrappedFolder, 'package.json'), JSON.stringify(pkgjsonContent))
@@ -200,7 +200,7 @@ test('pino({ transport }) from a wrapped dependency', { skip: isWin || isYarnPnp
   const wrapped = join(wrappedFolder, 'index.js')
 
   const wrappedContent = `
-    const pino = require('pinox')
+    const pino = require('plno-logger')
     const getCaller = require('get-caller-file')
 
     module.exports = function build () {

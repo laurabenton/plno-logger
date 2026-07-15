@@ -7,7 +7,7 @@ To accomplish this, simply use a child logger:
 
 ```js
 'use strict'
-// imports a pino logger instance of `require('pinox')()`
+// imports a pino logger instance of `require('plno-logger')()`
 const parentLogger = require('./lib/logger')
 const log = parentLogger.child({module: 'foo'})
 
@@ -79,7 +79,7 @@ parent and child loggers are used, Pino resolves the conflict in the sanest way.
 For example, consider the following:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 pino(pino.destination('./my-log'))
   .child({a: 'property'})
   .child({a: 'prop'})

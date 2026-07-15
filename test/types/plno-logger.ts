@@ -9,7 +9,7 @@ import Pino, {
   pino,
   multistream,
   transport
-} from '../../pinox.js'
+} from '../../plno-logger.js'
 
 const destination = join(
   tmpdir(),
@@ -49,7 +49,7 @@ const transports = transport({
     },
     {
       level: 'trace',
-      target: 'pinox/file',
+      target: 'plno-logger/file',
       options: { destination }
     }
   ]

@@ -15,7 +15,7 @@ which can have the following properties:
 ### `asObject` (Boolean)
 
 ```js
-const pino = require('pinox')({browser: {asObject: true}})
+const pino = require('plno-logger')({browser: {asObject: true}})
 ```
 
 The `asObject` option will create a pino-like log object instead of
@@ -30,7 +30,7 @@ When `write` is set, `asObject` will always be `true`.
 ### `asObjectBindingsOnly` (Boolean)
 
 ```js
-const pino = require('pinox')({browser: {asObjectBindingsOnly: true}})
+const pino = require('plno-logger')({browser: {asObjectBindingsOnly: true}})
 ```
 
 The `asObjectBindingsOnly` option is similar to `asObject` but will keep the message
@@ -70,7 +70,7 @@ Attempts to capture and include the originating callsite (file:line:column) for 
 
 ```js
 // Object mode: adds `caller` to the log object
-const pino = require('pinox')({
+const pino = require('plno-logger')({
   browser: {
     asObject: true,
     reportCaller: true
@@ -81,7 +81,7 @@ pino.info('hello')
 // -> { level: 30, msg: 'hello', time: <ts>, caller: '/path/to/file.js:10:15' }
 
 // Default mode: appends the caller string as the last console argument
-const pino2 = require('pinox')({
+const pino2 = require('plno-logger')({
   browser: {
     reportCaller: true
   }
@@ -106,7 +106,7 @@ If `write` is set to a single function, all logging objects are passed
 to this function.
 
 ```js
-const pino = require('pinox')({
+const pino = require('plno-logger')({
   browser: {
     write: (o) => {
       // do something with o
@@ -122,7 +122,7 @@ to using the `console`.
 
 
 ```js
-const pino = require('pinox')({
+const pino = require('plno-logger')({
   browser: {
     write: {
       info: function (o) {
@@ -146,7 +146,7 @@ which they otherwise wouldn't be if the Error serializer was enabled.
 We can turn all serializers on,
 
 ```js
-const pino = require('pinox')({
+const pino = require('plno-logger')({
   browser: {
     serialize: true
   }
@@ -156,7 +156,7 @@ const pino = require('pinox')({
 Or we can selectively enable them via an array:
 
 ```js
-const pino = require('pinox')({
+const pino = require('plno-logger')({
   serializers: {
     custom: myCustomSerializer,
     another: anotherSerializer
@@ -177,7 +177,7 @@ If `serialize` is an array the standard error serializer is also automatically e
 be explicitly disabled by including a string in the serialize array: `!stdSerializers.err`, like so:
 
 ```js
-const pino = require('pinox')({
+const pino = require('plno-logger')({
   serializers: {
     custom: myCustomSerializer,
     another: anotherSerializer
@@ -247,7 +247,7 @@ labels differ from server-side.
 The point of the `send` function is to remotely record log messages:
 
 ```js
-const pino = require('pinox')({
+const pino = require('plno-logger')({
   browser: {
     transmit: {
       level: 'warn',
@@ -271,7 +271,7 @@ const pino = require('pinox')({
 ### `disabled` (Boolean)
 
 ```js
-const pino = require('pinox')({browser: {disabled: true}})
+const pino = require('plno-logger')({browser: {disabled: true}})
 ```
 
 The `disabled` option will disable logging in browser if set

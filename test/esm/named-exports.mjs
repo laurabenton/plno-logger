@@ -4,7 +4,7 @@ import { hostname } from 'node:os'
 import { readFileSync } from 'node:fs'
 
 import { sink, check, once, watchFileCreated, file } from '../helper.js'
-import { pino, destination } from '../../pinox.js' 
+import { pino, destination } from '../../plno-logger.js' 
 
 test('named exports support', async () => {
   const stream = sink()

@@ -1,6 +1,6 @@
 'use strict'
 
-const pino = require('./pinox')
+const pino = require('./plno-logger')
 const { once } = require('node:events')
 
 module.exports = async function (opts = {}) {

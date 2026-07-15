@@ -8,7 +8,7 @@ module like [`pino-pretty`][pp]:
 1. Install a prettifier module as a separate dependency, e.g. `npm install pino-pretty`.
 2. Instantiate the logger with the `transport.target` option set to `'pino-pretty'`:
   ```js
-  const pino = require('pinox')
+  const pino = require('plno-logger')
   const logger = pino({
     transport: {
       target: 'pino-pretty'
@@ -19,7 +19,7 @@ module like [`pino-pretty`][pp]:
   ```
 3. The transport option can also have an options object containing `pino-pretty` options:
   ```js
-  const pino = require('pinox')
+  const pino = require('plno-logger')
   const logger = pino({
     transport: {
       target: 'pino-pretty',

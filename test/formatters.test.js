@@ -351,7 +351,7 @@ test('throws when custom level formatter is used with transport.targets', async 
         transport: {
           targets: [
             {
-              target: 'pinox/file',
+              target: 'plno-logger/file',
               options: { destination: 'foo.log' }
             }
           ]

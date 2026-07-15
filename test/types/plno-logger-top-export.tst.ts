@@ -14,7 +14,7 @@ import {
   stdTimeFunctions,
   transport,
   version
-} from '../../pinox.js'
+} from '../../plno-logger.js'
 
 expect(destination('')).type.toBe<SonicBoom>()
 expect(levels).type.toBe<LevelMapping>()
@@ -26,7 +26,7 @@ expect(version).type.toBe<string>()
 
 expect(
   transport({
-    target: '#pinox/pretty',
+    target: '#plno-logger/pretty',
     options: { some: 'options for', the: 'transport' }
   })
 ).type.toBe<ThreadStream>()

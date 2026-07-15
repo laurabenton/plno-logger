@@ -1,6 +1,6 @@
 import { expect } from 'tstyche'
 
-import pino from '../../pinox.js'
+import pino from '../../plno-logger.js'
 import type {
   LevelWithSilent,
   Logger,
@@ -11,7 +11,7 @@ import type {
   LevelWithSilentOrString,
   LoggerExtras,
   LoggerOptions
-} from '../../pinox.js'
+} from '../../plno-logger.js'
 
 // NB: can also use `import * as pino`, but that form is callable as `pino()`
 // under `esModuleInterop: false` or `pino.default()` under `esModuleInterop: true`.

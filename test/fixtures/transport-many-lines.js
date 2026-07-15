@@ -4,7 +4,7 @@ const pino = require('../..')
 const transport = pino.transport({
   targets: [{
     level: 'info',
-    target: 'pinox/file',
+    target: 'plno-logger/file',
     options: {
       destination: process.argv[2]
     }

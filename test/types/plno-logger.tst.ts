@@ -4,7 +4,7 @@ import { IncomingMessage, ServerResponse } from 'node:http'
 import { Socket } from 'node:net'
 import { mock } from 'node:test'
 
-import pino, { type LogFn, type LoggerOptions } from '../../pinox.js'
+import pino, { type LogFn, type LoggerOptions } from '../../plno-logger.js'
 import Logger = pino.Logger
 
 const log = pino()

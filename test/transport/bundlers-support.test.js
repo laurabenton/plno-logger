@@ -7,7 +7,7 @@ const { join } = require('node:path')
 const { readFile } = require('node:fs').promises
 
 const { watchFileCreated, file } = require('../helper')
-const pino = require('../../pinox')
+const pino = require('../../plno-logger')
 
 const { pid } = process
 const hostname = os.hostname()
@@ -40,7 +40,7 @@ test('pino.transport with destination overridden by bundler', async (t) => {
 
 test('pino.transport with worker destination overridden by bundler', async (t) => {
   globalThis.__bundlerPathsOverrides = {
-    'pinox-worker': join(__dirname, '..', '..', 'lib/worker.js')
+    'plno-logger-worker': join(__dirname, '..', '..', 'lib/worker.js')
   }
 
   const destination = file()
@@ -70,7 +70,7 @@ test('pino.transport with worker destination overridden by bundler', async (t) =
 
 test('pino.transport with worker destination overridden by bundler and mjs transport', async (t) => {
   globalThis.__bundlerPathsOverrides = {
-    'pinox-worker': join(__dirname, '..', '..', 'lib/worker.js')
+    'plno-logger-worker': join(__dirname, '..', '..', 'lib/worker.js')
   }
 
   const destination = file()

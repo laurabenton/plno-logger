@@ -6,7 +6,7 @@ const diagChan = require('node:diagnostics_channel')
 const { AsyncLocalStorage } = require('node:async_hooks')
 const { Writable } = require('node:stream')
 const tspl = require('@matteo.collina/tspl')
-const pino = require('../pinox')
+const pino = require('../plno-logger')
 
 const hostname = os.hostname()
 const { pid } = process

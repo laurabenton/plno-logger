@@ -64,7 +64,7 @@ const fs = require('node:fs')
 fs.writeFileSync('/var/run/myapp.pid', process.pid)
 
 const dest = pino.destination('/log/file')
-const logger = require('pinox')(dest)
+const logger = require('plno-logger')(dest)
 process.on('SIGHUP', () => dest.reopen())
 ```
 
@@ -131,7 +131,7 @@ In this example, we use `stderr` for `error` level logs and `stdout` as default
 for all other levels (e.g. `debug`, `info`, and `warn`).
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 var streams = [
   {level: 'debug', stream: process.stdout},
   {level: 'error', stream: process.stderr},
@@ -169,7 +169,7 @@ However, you can use the [`formatters`](/docs/api.md#formatters-object) option
 with a [`level`](/docs/api.md#level) function to print the string name instead of the level value :
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 
 const log = pino({
   formatters: {
@@ -239,7 +239,7 @@ log data is present inside a `message` key instead of the default `msg` key that
 similar to the one below to retain log levels in Google Cloud Logging
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 
 // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#logseverity
 const PinoLevelToSeverityLookup = {
@@ -315,7 +315,7 @@ can be used:
 ```js
 'use strict'
 
-const log = require('pinox')({
+const log = require('plno-logger')({
   level: 'debug',
   hooks: {
     logMethod (inputArgs, method) {
@@ -341,7 +341,7 @@ The best performance for logging directly to stdout is _usually_ achieved by usi
 default configuration:
 
 ```js
-const log = require('pinox')();
+const log = require('plno-logger')();
 ```
 
 You should only have to configure custom transports or other settings

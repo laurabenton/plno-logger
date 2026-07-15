@@ -282,7 +282,7 @@ import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { requestId } from 'hono/request-id';
 import { structuredLogger } from '@hono/structured-logger';
-import pino from 'pinox';
+import pino from 'plno-logger';
 
 const rootLogger = pino();
 

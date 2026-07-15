@@ -6,7 +6,7 @@ import fs from 'node:fs'
 import * as url from 'node:url'
 
 import { watchFileCreated } from '../helper'
-import pino from '../../pinox'
+import pino from '../../plno-logger'
 
 const readFile = fs.promises.readFile
 

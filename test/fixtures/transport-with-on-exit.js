@@ -2,7 +2,7 @@
 const pino = require('../..')
 const log = pino({
   transport: {
-    target: 'pinox/file',
+    target: 'plno-logger/file',
     options: { destination: 1 }
   }
 })

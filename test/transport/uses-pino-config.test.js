@@ -31,7 +31,7 @@ test('transport uses pino config', async (t) => {
     pipeline: [{
       target: join(__dirname, '..', 'fixtures', 'transport-uses-pino-config.js')
     }, {
-      target: 'pinox/file',
+      target: 'plno-logger/file',
       options: { destination }
     }]
   })
@@ -72,7 +72,7 @@ test('transport uses pino config without customizations', async (t) => {
     pipeline: [{
       target: join(__dirname, '..', 'fixtures', 'transport-uses-pino-config.js')
     }, {
-      target: 'pinox/file',
+      target: 'plno-logger/file',
       options: { destination }
     }]
   })
@@ -116,7 +116,7 @@ test('transport uses pino config with multistream', async (t) => {
     pipeline: [{
       target: join(__dirname, '..', 'fixtures', 'transport-uses-pino-config.js')
     }, {
-      target: 'pinox/file',
+      target: 'plno-logger/file',
       options: { destination }
     }]
   })

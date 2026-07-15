@@ -556,7 +556,7 @@ This way, when searching something like Kibana for values, one can consistently 
 
 For example,
 ```js
-const logger = require('pinox')({
+const logger = require('plno-logger')({
   nestedKey: 'payload'
 })
 
@@ -581,14 +581,14 @@ documented in the [Browser API ⇗](/docs/browser.md) documentation.
 The `transport` option is a shorthand for the [pino.transport()](#pino-transport) function.
 It supports the same input options:
 ```js
-require('pinox')({
+require('plno-logger')({
   transport: {
     target: '/absolute/path/to/my-transport.mjs'
   }
 })
 
 // or multiple transports
-require('pinox')({
+require('plno-logger')({
   transport: {
     targets: [
       { target: '/absolute/path/to/my-transport.mjs', level: 'error' },
@@ -614,7 +614,7 @@ when using the `transport` option. In this case, an `Error` will be thrown.
 The `onChild` function is a synchronous callback that will be called on each creation of a new child, passing the child instance as its first argument.
 Any error thrown inside the callback will be uncaught and should be handled inside the callback.
 ```js
-const parent = require('pinox')({ onChild: (instance) => {
+const parent = require('plno-logger')({ onChild: (instance) => {
   // Execute call back code for each newly created child.
 }})
 // `onChild` will now be executed with the new child.
@@ -637,17 +637,17 @@ Note that the `destination` parameter can be the result of `pino.transport()`.
 
 ```js
 // pino.destination(1) by default
-const stdoutLogger = require('pinox')()
+const stdoutLogger = require('plno-logger')()
 
 // destination param may be in first position when no options:
-const fileLogger = require('pinox')( pino.destination('/log/path'))
+const fileLogger = require('plno-logger')( pino.destination('/log/path'))
 
 // use the stderr file handle to log to stderr:
 const opts = {name: 'my-logger'}
-const stderrLogger = require('pinox')(opts, pino.destination(2))
+const stderrLogger = require('plno-logger')(opts, pino.destination(2))
 
 // automatic wrapping in pino.destination
-const fileLogger = require('pinox')('/log/path')
+const fileLogger = require('plno-logger')('/log/path')
 
 // Asynchronous logging
 const fileLogger = pino(pino.destination({ dest: '/log/path', sync: false }))
@@ -1010,7 +1010,7 @@ child.info('message proxied!')
 Setting `options.redact` to an array or object will override the parent `redact` options. To remove `redact` options inherited from the parent logger set this value as an empty array (`[]`).
 
 ```js
-const logger = require('pinox')({ redact: ['hello'] })
+const logger = require('plno-logger')({ redact: ['hello'] })
 logger.info({ hello: 'world' })
 // {"level":30,"time":1625794363403,"pid":67930,"hostname":"x","hello":"[Redacted]"}
 const child = logger.child({ foo: 'bar' }, { redact: ['foo'] })
@@ -1028,7 +1028,7 @@ Setting the `serializers` key of the `options` object will override
 any configured parent serializers.
 
 ```js
-const logger = require('pinox')()
+const logger = require('plno-logger')()
 logger.info({test: 'will appear'})
 // {"level":30,"time":1531259759482,"pid":67930,"hostname":"x","test":"will appear"}
 const child = logger.child({}, {serializers: {test: () => `child-only serializer`}})
@@ -1156,7 +1156,7 @@ The `logger.levels` property holds the mappings between levels and values,
 and vice versa.
 
 ```sh
-$ node -p "require('pinox')().levels"
+$ node -p "require('plno-logger')().levels"
 ```
 
 ```js
@@ -1195,7 +1195,7 @@ The listener is passed five arguments:
 * `logger` – the logger instance from which the event originated
 
 ```js
-const logger = require('pinox')()
+const logger = require('plno-logger')()
 logger.on('level-change', (lvl, val, prevLvl, prevVal) => {
   console.log('%s (%d) was changed to %s (%d)', prevLvl, prevVal, lvl, val)
 })
@@ -1206,7 +1206,7 @@ Please note that due to a [known bug](https://github.com/pinojs/pino/issues/1006
 fire a `level-change` event. These events can be ignored by writing an event handler like:
 
 ```js
-const logger = require('pinox')()
+const logger = require('plno-logger')()
 logger.on('level-change', function (lvl, val, prevLvl, prevVal, instance) {
   if (logger !== instance) {
     return
@@ -1240,7 +1240,7 @@ Create a Pino Destination instance: a stream-like object with
 significantly more throughput than a standard Node.js stream.
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const logger = pino(pino.destination('./my-file'))
 const logger2 = pino(pino.destination())
 const logger3 = pino(pino.destination({
@@ -1274,7 +1274,7 @@ Create a stream that routes logs to a worker thread that
 wraps around a [Pino Transport](/docs/transports.md).
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   target: 'some-transport',
   options: { some: 'options for', the: 'transport' }
@@ -1285,14 +1285,14 @@ pino(transport)
 Multiple transports may also be defined, and specific levels can be logged to each transport:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   targets: [{
     level: 'info',
     target: 'pino-pretty' // must be installed separately
   }, {
     level: 'trace',
-    target: 'pinox/file',
+    target: 'plno-logger/file',
     options: { destination: '/path/to/store/logs' }
   }]
 })
@@ -1302,7 +1302,7 @@ pino(transport)
 A pipeline could also be created to transform log lines _before_ sending them:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   pipeline: [{
     target: 'pino-syslog' // must be installed separately
@@ -1316,14 +1316,14 @@ pino(transport)
 Multiple transports can now be defined to include pipelines:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   targets: [{
     level: 'info',
     target: 'pino-pretty' // must be installed separately
   }, {
     level: 'trace',
-    target: 'pinox/file',
+    target: 'plno-logger/file',
     options: { destination: '/path/to/store/logs' }
   }, {
     pipeline: [{
@@ -1349,7 +1349,7 @@ If you are embedding/integrating pino within your framework, you will need to ma
 like so:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const getCaller = require('get-caller-file')
 
 module.exports = function build () {
@@ -1395,7 +1395,7 @@ object implementing the [MultiStreamRes](#multistreamres) interface.
 
 ```js
 var fs = require('node:fs')
-var pino = require('pinox')
+var pino = require('plno-logger')
 var pretty = require('pino-pretty')
 var streams = [
   {stream: fs.createWriteStream('/tmp/info.stream.out')},
@@ -1425,7 +1425,7 @@ In order for `multistream` to work, the log level __must__ be set to the lowest 
     `dedupe` flag can be useful for example when using `pino.multistream` to redirect `error` logs to `process.stderr` and others to `process.stdout`:
 
     ```js
-    var pino = require('pinox')
+    var pino = require('plno-logger')
     var multistream = pino.multistream
     var streams = [
       {level: 'debug', stream: process.stdout},

@@ -9,7 +9,7 @@ const file = join(tmpdir(), `pino-${process.pid}-example`)
 const transport = pino.transport({
   targets: [{
     level: 'warn',
-    target: 'pinox/file',
+    target: 'plno-logger/file',
     options: {
       destination: file
     }

@@ -1,5 +1,5 @@
 import { join } from 'node:path'
-import pino from '../../../pinox'
+import pino from '../../../plno-logger'
 
 const transport = pino.transport({
   target: join(__dirname, 'transport-worker.ts')

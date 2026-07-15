@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert'
 
-import pino from '../../pinox.js'
+import pino from '../../plno-logger.js'
 import helper from '../helper.js'
 
 const { sink, check, once } = helper

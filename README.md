@@ -1,6 +1,6 @@
-# pinox
-[![npm version](https://img.shields.io/npm/v/pinox)](https://www.npmjs.com/package/pinox)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/laurabenton/pinox/ci.yml)](https://github.com/laurabenton/pinox/actions)
+# plno-logger
+[![npm version](https://img.shields.io/npm/v/plno-logger)](https://www.npmjs.com/package/plno-logger)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/laurabenton/plno-logger/ci.yml)](https://github.com/laurabenton/plno-logger/actions)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://standardjs.com/)
 
 [Very low overhead](#low-overhead) JavaScript logger.
@@ -40,18 +40,18 @@ Pinox works on [Pear](https://docs.pears.com), which is built on [Bare](https://
 
 Using NPM:
 ```
-$ npm install pinox
+$ npm install plno-logger
 ```
 
 Using YARN:
 ```
-$ yarn add pinox
+$ yarn add plno-logger
 ```
 
 ## Usage
 
 ```js
-const logger = require('pinox')()
+const logger = require('plno-logger')()
 
 logger.info('hello world')
 
@@ -84,7 +84,7 @@ alert triggering, reformatting, and all forms of log processing
 are conducted in a separate process or thread.
 
 In Pinox terminology, we call all log processors "transports" and recommend that the
-transports be run in a worker thread using our `pinox.transport` API.
+transports be run in a worker thread using our `plno-logger.transport` API.
 
 For more details see our [Transports⇗](docs/transports.md) document.
 

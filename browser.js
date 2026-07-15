@@ -13,7 +13,7 @@ function handleRedactOpts (opts) {
   }
   const { paths, censor = CENSOR, remove } = opts
   if (!Array.isArray(paths)) {
-    throw Error('pinox – redact must contain an array of strings')
+    throw Error('plno-logger – redact must contain an array of strings')
   }
   return { paths, censor: remove ? undefined : censor, remove }
 }
@@ -92,7 +92,7 @@ function pino (opts) {
   opts.browser = opts.browser || {}
 
   const transmit = opts.browser.transmit
-  if (transmit && typeof transmit.send !== 'function') { throw Error('pinox: transmit option must have a send function') }
+  if (transmit && typeof transmit.send !== 'function') { throw Error('plno-logger: transmit option must have a send function') }
 
   const proto = opts.browser.write || _console
   if (opts.browser.write) opts.browser.asObject = true
@@ -552,7 +552,8 @@ function pfGlobalThisOrFallback () {
 /* eslint-enable */
 
 module.exports.default = pino
-module.exports.pinox = pino
+module.exports.plno = pino
+module.exports['plno-logger'] = pino
 module.exports.pino = pino
 
 // Attempt to extract the user callsite (file:line:column)

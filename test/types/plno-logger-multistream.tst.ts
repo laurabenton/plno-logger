@@ -2,7 +2,7 @@ import { expect } from 'tstyche'
 
 import { createWriteStream } from 'node:fs'
 
-import pino, { multistream } from '../../pinox.js'
+import pino, { multistream } from '../../plno-logger.js'
 
 const streams = [
   { stream: process.stdout },

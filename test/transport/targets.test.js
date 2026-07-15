@@ -5,13 +5,13 @@ const { join } = require('node:path')
 const Writable = require('node:stream').Writable
 const proxyquire = require('proxyquire')
 const tspl = require('@matteo.collina/tspl')
-const pino = require('../../pinox')
+const pino = require('../../plno-logger')
 
 test('file-target mocked', async function (t) {
   const plan = tspl(t, { plan: 1 })
   let ret
   const fileTarget = proxyquire('../../file', {
-    './pinox': {
+    './plno-logger': {
       destination (opts) {
         plan.deepEqual(opts, { dest: 1, sync: false })
 

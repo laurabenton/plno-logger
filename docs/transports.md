@@ -39,7 +39,7 @@ We would set up our transport by creating a transport stream with `pino.transpor
 and passing it to the `pino` function:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   target: '/absolute/path/to/my-transport.mjs'
 })
@@ -71,7 +71,7 @@ Let's imagine the above was published to npm with the module name `some-file-tra
 The `options.destination` value can be set when creating the transport stream with `pino.transport` like so:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   target: 'some-file-transport',
   options: { destination: '/dev/null' }
@@ -88,7 +88,7 @@ What if we wanted to use both transports, but send only error logs to `my-transp
 sending all logs to `some-file-transport`? We can use the per-target `level` option:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   targets: [
     { target: '/absolute/path/to/my-transport.mjs', level: 'error' },
@@ -148,7 +148,7 @@ If you need `debug` (or lower) logs to reach one or more targets, set:
 
 If we're using custom levels, they should be passed in when using more than one transport.
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   targets: [
     { target: '/absolute/path/to/my-transport.mjs', level: 'error' },
@@ -174,8 +174,8 @@ const logger = pino({
   },
   transport: {
     targets: [
-      { target: 'pinox/file', options: { destination: 1 } },
-      { target: 'pinox/file', options: { destination: 2 } }
+      { target: 'plno-logger/file', options: { destination: 1 } },
+      { target: 'plno-logger/file', options: { destination: 2 } }
     ]
   }
 })
@@ -191,7 +191,7 @@ Supported alternatives:
 
 It is also possible to use the `dedupe` option to send logs only to the stream with the higher level.
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   targets: [
     { target: '/absolute/path/to/my-transport.mjs', level: 'error' },
@@ -204,7 +204,7 @@ pino(transport)
 
 To make pino log synchronously, pass `sync: true` to transport options.
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   targets: [
     { target: '/absolute/path/to/my-transport.mjs', level: 'error' },
@@ -225,7 +225,7 @@ preload flags from the transport worker's `execArgv` to prevent infinite worker 
 
 ```js
 // preload.mjs
-import pino from 'pinox'
+import pino from 'plno-logger'
 
 export const logger = pino({
   transport: {
@@ -307,12 +307,12 @@ callback is called or the returned promise resolves. Otherwise, log lines will b
 
 ### Writing to a custom transport & stdout
 
-In case you want to both use a custom transport, and output the log entries with default processing to STDOUT, you can use 'pinox/file' transport configured with `destination: 1`:
+In case you want to both use a custom transport, and output the log entries with default processing to STDOUT, you can use 'plno-logger/file' transport configured with `destination: 1`:
 
 ```js
     const transports = [
       {
-        target: 'pinox/file',
+        target: 'plno-logger/file',
         options: { destination: 1 } // this writes to STDOUT
       },
       {
@@ -362,16 +362,16 @@ export default async function (options) {
 Then you can pipeline them with:
 
 ```js
-import pino from 'pinox'
+import pino from 'plno-logger'
 
 const logger = pino({
   transport: {
     pipeline: [{
       target: './my-transform.js'
     }, {
-      // Use target: 'pinox/file' with STDOUT descriptor 1 to write
+      // Use target: 'plno-logger/file' with STDOUT descriptor 1 to write
       // logs without any change.
-      target: 'pinox/file',
+      target: 'plno-logger/file',
       options: { destination: 1 }
     }]
   }
@@ -402,7 +402,7 @@ export default (options: { destination: string }) => {
 
 ```js
 // app.js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   target: './my-transport.mts',
   options: { destination: '/path/to/file' }
@@ -445,38 +445,38 @@ TypeScript transports to JavaScript before deployment.
 
 ### Notable transports
 
-#### `pinox/file`
+#### `plno-logger/file`
 
-The `pinox/file` transport routes logs to a file (or file descriptor).
+The `plno-logger/file` transport routes logs to a file (or file descriptor).
 
 The `options.destination` property may be set to specify the desired file destination.
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
-  target: 'pinox/file',
+  target: 'plno-logger/file',
   options: { destination: '/path/to/file' }
 })
 pino(transport)
 ```
 
-By default, the `pinox/file` transport assumes the directory of the destination file exists. If it does not exist, the transport will throw an error when it attempts to open the file for writing. The `mkdir` option may be set to `true` to configure the transport to create the directory, if it does not exist, before opening the file for writing.
+By default, the `plno-logger/file` transport assumes the directory of the destination file exists. If it does not exist, the transport will throw an error when it attempts to open the file for writing. The `mkdir` option may be set to `true` to configure the transport to create the directory, if it does not exist, before opening the file for writing.
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
-  target: 'pinox/file',
+  target: 'plno-logger/file',
   options: { destination: '/path/to/file', mkdir: true }
 })
 pino(transport)
 ```
 
-By default, the `pinox/file` transport appends to the destination file if it exists. The `append` option may be set to `false` to configure the transport to truncate the file upon opening it for writing.
+By default, the `plno-logger/file` transport appends to the destination file if it exists. The `append` option may be set to `false` to configure the transport to truncate the file upon opening it for writing.
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
-  target: 'pinox/file',
+  target: 'plno-logger/file',
   options: { destination: '/path/to/file', append: false }
 })
 pino(transport)
@@ -484,7 +484,7 @@ pino(transport)
 
 The `options.destination` property may also be a number to represent a file descriptor. Typically this would be `1` to write to STDOUT or `2` to write to STDERR. If `options.destination` is not set, it defaults to `1` which means logs will be written to STDOUT. If `options.destination` is a string integer, e.g. `'1'`, it will be coerced to a number and used as a file descriptor. If this is not desired, provide a full path, e.g. `/tmp/1`.
 
-The difference between using the `pinox/file` transport builtin and using `pino.destination` is that `pino.destination` runs in the main thread, whereas `pinox/file` sets up `pino.destination` in a worker thread.
+The difference between using the `plno-logger/file` transport builtin and using `pino.destination` is that `pino.destination` runs in the main thread, whereas `plno-logger/file` sets up `pino.destination` in a worker thread.
 
 #### `pino-pretty`
 
@@ -495,7 +495,7 @@ By default the `pino-pretty` builtin logs to STDOUT.
 The `options.destination` property may be set to log pretty logs to a file descriptor or file. The following would send the prettified logs to STDERR:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   target: 'pino-pretty',
   options: { destination: 1 } // use 2 for stderr
@@ -509,7 +509,7 @@ The new transports boot asynchronously and calling `process.exit()` before the t
 starts will cause logs to not be delivered.
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   targets: [
     { target: '/absolute/path/to/my-transport.mjs', level: 'error' },
@@ -620,7 +620,7 @@ PRs to this document are welcome for any new transports!
 [@axiomhq/pino](https://www.npmjs.com/package/@axiomhq/pino) is the official [Axiom](https://axiom.co/) transport for Pino, using [axiom-js](https://github.com/axiomhq/axiom-js).
 
 ```javascript
-import pino from 'pinox';
+import pino from 'plno-logger';
 
 const logger = pino(
   { level: 'info' },
@@ -655,7 +655,7 @@ The [@logtail/pino](https://www.npmjs.com/package/@logtail/pino) NPM package is 
 [@macfja/pino-fingers-crossed](https://github.com/MacFJA/js-pino-fingers-crossed) is a Pino v7+ transport that holds logs until a log level is reached, allowing to only have logs when it matters.
 
 ```js
-const pino = require('pinox');
+const pino = require('plno-logger');
 const { default: fingersCrossed, enable } = require('@macfja/pino-fingers-crossed')
 
 const logger = pino(fingersCrossed());
@@ -679,7 +679,7 @@ Pino v7+ transport that will send logs to an
 [OpenObserve](https://openobserve.ai) instance.
 
 ```
-const pino = require('pinox');
+const pino = require('plno-logger');
 const OpenobserveTransport = require('@openobserve/pino-openobserve');
 
 const logger = pino({
@@ -708,7 +708,7 @@ For full documentation check the [README](https://github.com/openobserve/pino-op
 from a dedicated worker:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   target: 'pino-airbrake-transport',
   options: {
@@ -746,7 +746,7 @@ For full documentation of command line switches read [README](https://github.com
 [pino-axiom](https://www.npmjs.com/package/pino-axiom) is a transport that will forward logs to [Axiom](https://axiom.co).
 
 ```javascript
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   target: 'pino-axiom',
   options: {
@@ -813,7 +813,7 @@ For full documentation of command line switches read [README](https://github.com
 from a dedicated worker:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   target: 'datadog-logger-integrations',
   options: {
@@ -875,7 +875,7 @@ https://github.com/deviantony/docker-elk to setup an ELK stack.
 [pino-discord-webhook](https://github.com/fabulousgk/pino-discord-webhook) is a  Pino v7+ compatible transport to forward log events to a [Discord](http://discord.com) webhook from a dedicated worker. 
 
 ```js
-import pino from 'pinox'
+import pino from 'plno-logger'
 
 const logger = pino({
   transport: {
@@ -941,7 +941,7 @@ $ node your-app.js | pino-gelf log
 ### pino-hana
 [pino-hana](https://github.com/HiImGiovi/pino-hana) is a Pino v7+ transport that save pino logs to a SAP HANA database.
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const logger = pino({
   transport: {
     target: 'pino-hana',
@@ -1007,7 +1007,7 @@ $ node index.js | pino-logflare --key YOUR_KEY --source YOUR_SOURCE
 [pino-logfmt](https://github.com/botflux/pino-logfmt) is a Pino v7+ transport that formats logs into [logfmt](https://brandur.org/logfmt). This transport can output the formatted logs to stdout or file.
 
 ```js
-import pino from 'pinox'
+import pino from 'plno-logger'
 
 const logger = pino({
   transport: {
@@ -1028,7 +1028,7 @@ node app.js | pino-loki --hostname localhost:3100 --labels='{ "application": "my
 
 Worker :
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   target: 'pino-loki',
   options: { host: 'localhost:3100' }
@@ -1091,7 +1091,7 @@ For full documentation and command line switches read the [README][pino-mysql].
 [pino-opentelemetry-transport](https://www.npmjs.com/package/pino-opentelemetry-transport) is a transport that will forward logs to an [OpenTelemetry log collector](https://opentelemetry.io/docs/collector/) using [OpenTelemetry JS instrumentation](https://opentelemetry.io/docs/instrumentation/js/).
 
 ```javascript
-const pino = require('pinox')
+const pino = require('plno-logger')
 
 const transport = pino.transport({
   target: 'pino-opentelemetry-transport',
@@ -1146,7 +1146,7 @@ $ node app.js | pino-redis -U redis://username:password@localhost:6379
 
 ```js
 import { join } from 'path';
-import pino from 'pinox';
+import pino from 'plno-logger';
 
 const transport = pino.transport({
   target: 'pino-roll',
@@ -1184,7 +1184,7 @@ For full documentation of command line switches see the [pino-sentry README](htt
 from a dedicated worker:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   target: 'pino-sentry-transport',
   options: {
@@ -1206,7 +1206,7 @@ As an alternative to using a Pino transport, Sentry's Node.js SDK (v10.18.0+) pr
 
 ```js
 const Sentry = require('@sentry/node')
-const pino = require('pinox')
+const pino = require('plno-logger')
 
 Sentry.init({
   dsn: 'https://******@sentry.io/12345',
@@ -1258,7 +1258,7 @@ $ node app.js | pino-seq --serverUrl http://localhost:5341 --apiKey 1234567890 -
 from a dedicated worker:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   target: '@autotelic/pino-seq-transport',
   options: { serverUrl: 'http://localhost:5341' }
@@ -1276,7 +1276,7 @@ pino(transport)
 from a dedicated worker:
 
 ```js
-const pino = require('pinox')
+const pino = require('plno-logger')
 const transport = pino.transport({
   target: '@youngkiu/pino-slack-webhook',
   options: {
@@ -1359,7 +1359,7 @@ Example output for the "hello world" log:
 [pino-telegram-webhook](https://github.com/Jhon-Mosk/pino-telegram-webhook) is a Pino v7+ transport for sending messages to [Telegram](https://telegram.org/). 
 
 ```js
-const pino = require('pinox');
+const pino = require('plno-logger');
 
 const logger = pino({
   transport: {
@@ -1397,7 +1397,7 @@ For full documentation of command line switches read the [README](https://github
 [pino-yc-transport](https://github.com/Jhon-Mosk/pino-yc-transport) is a Pino v7+ transport for writing to [Yandex Cloud Logging](https://yandex.cloud/ru/services/logging) from serveless functions or containers.
 
 ```js
-const pino = require("pinox");
+const pino = require("plno-logger");
 
 const config = {
   level: "debug",

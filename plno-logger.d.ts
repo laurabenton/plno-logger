@@ -491,7 +491,7 @@ declare namespace pino {
          * corresponding method is called. If a method isn't present, the logging falls back to using the `console`.
          *
          * @example
-         * const pino = require('pinox')({
+         * const pino = require('plno-logger')({
          *   browser: {
          *     write: (o) => {
          *       // do something with o
@@ -500,7 +500,7 @@ declare namespace pino {
          * })
          *
          * @example
-         * const pino = require('pinox')({
+         * const pino = require('plno-logger')({
          *   browser: {
          *     write: {
          *       info: function (o) {
@@ -548,14 +548,14 @@ declare namespace pino {
          * {@link https://github.com/pinojs/pino/blob/master/docs/api.md#serializers-object}.
          *
          * @example
-         * const pino = require('pinox')({
+         * const pino = require('plno-logger')({
          *   browser: {
          *     serialize: true
          *   }
          * })
          *
          * @example
-         * const pino = require('pinox')({
+         * const pino = require('plno-logger')({
          *   serializers: {
          *     custom: myCustomSerializer,
          *     another: anotherSerializer
@@ -569,7 +569,7 @@ declare namespace pino {
          * pino.info({custom: 'a', another: 'b'})
          *
          * @example
-         * const pino = require('pinox')({
+         * const pino = require('plno-logger')({
          *   serializers: {
          *     custom: myCustomSerializer,
          *     another: anotherSerializer
@@ -585,7 +585,7 @@ declare namespace pino {
          * Options for transmission of logs.
          *
          * @example
-         * const pino = require('pinox')({
+         * const pino = require('plno-logger')({
          *   browser: {
          *     transmit: {
          *       level: 'warn',
@@ -623,7 +623,7 @@ declare namespace pino {
          * The disabled option will disable logging in browser if set to true, by default it is set to false.
          *
          * @example
-         * const pino = require('pinox')({browser: {disabled: true}})
+         * const pino = require('plno-logger')({browser: {disabled: true}})
          */
         disabled?: boolean;
       };
@@ -854,7 +854,7 @@ declare namespace pino {
       opts?: MultiStreamOptions
     ): MultiStreamRes<TLevel>
 
-    export { pino as default, pino, pino as pinox }
+    export { pino as default, pino, pino as plno }
 }
 
 /// Callable default export

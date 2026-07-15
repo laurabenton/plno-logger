@@ -19,13 +19,13 @@ Example:
 // Inject this using your bundle plugin
 globalThis.__bundlerPathsOverrides = {
   'thread-stream-worker': pinoWebpackAbsolutePath('./thread-stream-worker.js')
-  'pinox/file': pinoWebpackAbsolutePath('./pino-file.js'),
-  'pinox-worker': pinoWebpackAbsolutePath('./pino-worker.js'),
+  'plno-logger/file': pinoWebpackAbsolutePath('./pino-file.js'),
+  'plno-logger-worker': pinoWebpackAbsolutePath('./pino-worker.js'),
   'pino-pretty': pinoWebpackAbsolutePath('./pino-pretty.js'),
 };
 ```
 
-Note that `pinox/file`, `pinox-worker` and `thread-stream-worker` are required identifiers. Other identifiers are possible based on the user configuration.
+Note that `plno-logger/file`, `plno-logger-worker` and `thread-stream-worker` are required identifiers. Other identifiers are possible based on the user configuration.
 
 ## Webpack Plugin
 

@@ -1,6 +1,6 @@
 'use strict'
 
-import pino from '../../pinox.js' 
+import pino from '../../plno-logger.js' 
 import { join } from 'node:path'
 
 const log = pino({

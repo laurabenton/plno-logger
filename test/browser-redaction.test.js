@@ -104,7 +104,7 @@ test('redact throws on invalid paths option', ({ end, throws }) => {
       browser: { asObject: true },
       redact: { paths: 'not-an-array' }
     })
-  }, /pinox – redact must contain an array of strings/)
+  }, /plno-logger – redact must contain an array of strings/)
   end()
 })
 

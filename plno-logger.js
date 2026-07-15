@@ -254,5 +254,6 @@ module.exports.version = version
 
 // Enables default and name export with TypeScript and Babel
 module.exports.default = pino
-module.exports.pinox = pino
+module.exports.plno = pino
+module.exports['plno-logger'] = pino
 module.exports.pino = pino

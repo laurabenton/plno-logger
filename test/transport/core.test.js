@@ -326,7 +326,7 @@ test('pino.transport with an array including a pino-pretty destination', async (
   const transport = pino.transport({
     targets: [{
       level: 'info',
-      target: 'pinox/file',
+      target: 'plno-logger/file',
       options: {
         destination: dest1
       }
@@ -418,7 +418,7 @@ test('pino.transport with target and targets', async () => {
 test('pino.transport with target pino/file', async (t) => {
   const destination = file()
   const transport = pino.transport({
-    target: 'pinox/file',
+    target: 'plno-logger/file',
     options: { destination }
   })
   t.after(transport.end.bind(transport))
@@ -446,7 +446,7 @@ test('pino.transport with target pino/file and mkdir option', async (t) => {
     }
   })
   const transport = pino.transport({
-    target: 'pinox/file',
+    target: 'plno-logger/file',
     options: { destination, mkdir: true }
   })
   t.after(transport.end.bind(transport))
@@ -467,7 +467,7 @@ test('pino.transport with target pino/file and append option', async (t) => {
   const destination = file()
   await writeFile(destination, JSON.stringify({ pid, hostname, time: Date.now(), level: 30, msg: 'hello' }))
   const transport = pino.transport({
-    target: 'pinox/file',
+    target: 'plno-logger/file',
     options: { destination, append: false }
   })
   t.after(transport.end.bind(transport))
@@ -645,7 +645,7 @@ test('pino transport options with target', async (t) => {
   const destination = file()
   const instance = pino({
     transport: {
-      target: 'pinox/file',
+      target: 'plno-logger/file',
       options: { destination }
     }
   })
@@ -669,8 +669,8 @@ test('pino transport options with targets', async (t) => {
   const instance = pino({
     transport: {
       targets: [
-        { target: 'pinox/file', options: { destination: dest1 } },
-        { target: 'pinox/file', options: { destination: dest2 } }
+        { target: 'plno-logger/file', options: { destination: dest1 } },
+        { target: 'plno-logger/file', options: { destination: dest2 } }
       ]
     }
   })
@@ -726,7 +726,7 @@ test('transport options with target and stream', async () => {
 
 test('transport options with stream', async (t) => {
   const dest1 = file()
-  const transportStream = pino.transport({ target: 'pinox/file', options: { destination: dest1 } })
+  const transportStream = pino.transport({ target: 'plno-logger/file', options: { destination: dest1 } })
   t.after(transportStream.end.bind(transportStream))
   assert.throws(
     () => {
@@ -734,20 +734,20 @@ test('transport options with stream', async (t) => {
         transport: transportStream
       })
     },
-    Error('option.transport do not allow stream, please pass to option directly. e.g. pinox(transport)')
+    Error('option.transport do not allow stream, please pass to option directly. e.g. plno-logger(transport)')
   )
 })
 
 test('pino.transport handles prototype pollution of __bundlerPathsOverrides', async (t) => {
   // eslint-disable-next-line no-extend-native
-  Object.prototype.__bundlerPathsOverrides = { 'pinox/file': '/malicious/path' }
+  Object.prototype.__bundlerPathsOverrides = { 'plno-logger/file': '/malicious/path' }
   t.after(() => {
     delete Object.prototype.__bundlerPathsOverrides
   })
 
   const destination = file()
   const transport = pino.transport({
-    target: 'pinox/file',
+    target: 'plno-logger/file',
     options: { destination }
   })
   t.after(transport.end.bind(transport))
@@ -793,7 +793,7 @@ test('pino.transport with targets sets worker thread name to pino.transport', { 
   t.after(transport.end.bind(transport))
   const instance = pino(transport)
   transport.once('workerThreadName', (name) => {
-    plan.equal(name, 'pinox.transport')
+    plan.equal(name, 'plno-logger.transport')
   })
   instance.info('hello')
 
@@ -810,7 +810,7 @@ test('pino.transport with pipeline sets worker thread name to pino.transport', {
   t.after(transport.end.bind(transport))
   const instance = pino(transport)
   transport.once('workerThreadName', (name) => {
-    plan.equal(name, 'pinox.transport')
+    plan.equal(name, 'plno-logger.transport')
   })
   instance.info('hello')
 
